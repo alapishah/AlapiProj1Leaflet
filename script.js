@@ -1,15 +1,18 @@
-var map = L.map('mapid').setView([37.7749, -122.4194], 13);
+var map = L.map('mapid').setView([41.8781, -87.6298], 13);
 
- L.tileLayer('https://server.arcgisonline.com/ArcGIS/rest/services/World_Terrain_Base/MapServer/tile/{z}/{y}/{x}', {
+ L.tileLayer('https://{s}.tile.openstreetmap.fr/hot/{z}/{x}/{y}.png', {
 	attribution: 'Tiles &copy; Esri &mdash; Source: USGS, Esri, TANA, DeLorme, and NPS',
 	maxZoom: 13
 }).addTo(map);
 
   // load GeoJSON from an external file
-  $.getJSON("https://raw.githubusercontent.com/gbrunner/adv-programming-for-gis-and-rs/master/Web%20Development%20Module/Unit%201%20-%20GitHub%20and%20Leaflet/sf_crime.geojson",function(data){
+ $.getJSON("https://raw.githubusercontent.com/alapishah/Chicago-recycling-service-areas-geojson/main/Recycling%20Service%20Areas.geojson",function(data1){
+// L.geoJson function is used to parse geojson file and load on to map
+L.geoJson(data1).addTo(map);
+}); $.getJSON("https://raw.githubusercontent.com/alapishah/chi-recycling-dropoff/main/Recycling%20Dropoff%20Sites.geojson",function(data){
          var ratIcon = L.icon({
-    iconUrl: 'https://e7.pngegg.com/pngimages/170/541/png-clipart-robbery-burglary-crime-theft-thief-mammal-people.png',
-    iconSize: [30,30]
+    iconUrl: 'https://www.recycling.com/wp-content/uploads/recycling%20symbols/universal/Universal%20Recycling%20Symbol%20%28U%2b2672%29.png',
+    iconSize: [50,50]
   }); 
   L.geoJson(data  ,{
     pointToLayer: function(feature,latlng){
@@ -20,4 +23,3 @@ var map = L.map('mapid').setView([37.7749, -122.4194], 13);
     }
   }).addTo(map);
 });
-
